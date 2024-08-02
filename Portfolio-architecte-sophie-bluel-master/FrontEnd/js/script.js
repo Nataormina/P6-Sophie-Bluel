@@ -31,8 +31,6 @@
   getWorks();
 
 /*Ajout des travaux au DOM */
-
-
 function setFigure(data) {
 const figure = document.createElement("figure");
 figure.innerHTML = `<img src=${data.imageUrl} alt=${data.title}>
@@ -41,4 +39,27 @@ figure.innerHTML = `<img src=${data.imageUrl} alt=${data.title}>
 document.querySelector(".gallery").append(figure);
 }
  
-  
+ /* Ajout Catégories */
+ async function getCategories() {
+  const url = "http://localhost:5678/api/categories";
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    const json = await response.json();
+    for (let i = 0; i < json.length; i++) {
+      setFilter(json[i]);
+    }
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+getCategories();
+
+function setFilter(data) {
+  const div = document.createElement("div");
+  div.innerHTML = `${data.name}`;
+  document.querySelector(".btn-filter").append(div)
+}
