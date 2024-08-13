@@ -120,4 +120,14 @@ if (localStorage.getItem("userId") && localStorage.getItem("token")) {
 }
 });*/
 
- 
+function displayModeAdmin () {
+  if (sessionStorage.authToken) {
+    console.log("ok");
+    const bannerEdition = document.createElement("div");
+    bannerEdition.className = "mode-edition";
+    bannerEdition.innerHTML = '<p><i class="fa-regular fa-pen-to-square"></i>Mode édition</p>';
+    document.body.prepend(bannerEdition);
+  }
+}
+
+displayModeAdmin();

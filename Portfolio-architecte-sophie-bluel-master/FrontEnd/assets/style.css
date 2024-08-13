@@ -124,6 +124,14 @@ li:hover {
 
 #introduction p {
 	margin-bottom: 0.5em;
+	width: 404px;
+	color: #3D3D3D;
+	font-family: 'Work Sans';
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 16.42px;
+	text-align: left;
+
 }
 #portfolio h2 {
 	text-align: center;
@@ -303,3 +311,4 @@ footer nav ul {
 	padding-top: 10px;
 	justify-self: center;
  }
+

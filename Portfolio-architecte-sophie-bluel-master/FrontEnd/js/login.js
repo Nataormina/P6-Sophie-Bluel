@@ -134,10 +134,11 @@ async function pushSubmit(event) {
     const token = result.token;
     //Stockage du token d'authentification pour pouvoir réaliser les envois et suppressions de travaux
     sessionStorage.setItem("authToken", token);
-    console.log(token);
+    
     //Redirection vers la page d'accueil lorsque l'adresse mail et le mot de passe sont corrects
     window.location.href = "index.html"
   }
+
 
 
 
