@@ -129,7 +129,7 @@ async function pushSubmit(event) {
    
     
   }
-  
+  else { 
     let result = await response.json();
     const token = result.token;
     //Stockage du token d'authentification pour pouvoir réaliser les envois et suppressions de travaux
@@ -138,7 +138,7 @@ async function pushSubmit(event) {
     //Redirection vers la page d'accueil lorsque l'adresse mail et le mot de passe sont corrects
     window.location.href = "index.html"
   }
-
+}
 
 
 
