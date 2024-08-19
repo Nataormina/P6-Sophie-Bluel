@@ -126,9 +126,10 @@ if (localStorage.getItem("userId") && localStorage.getItem("token")) {
 
 
 // Affichage de la modale au clic sur Mode édition
-
-
 let bannerEdition;// Déclarer la variable en dehors de la fonction
+
+
+
 
 function displayModeAdmin () {
   if (sessionStorage.authToken) {
@@ -136,7 +137,16 @@ function displayModeAdmin () {
     bannerEdition = document.createElement("div"); // Supprimer le "const"
     bannerEdition.className = "modeEdition";
     bannerEdition.innerHTML = '<p><a href=""><i class="fa-regular fa-pen-to-square"></i>Mode édition</a></p>';
+    loginLi.innerHTML = '<a href="#">logout</a>';
+    document.getElementById("loginLi").addEventListener("click", function(event) {
+      event.preventDefault(); // Empêche le comportement par défaut de l'ancre  
+      sessionStorage.removeItem('authToken'); // Supprime le token de session  
+      // Vous pouvez également rediriger l'utilisateur ou mettre à jour l'interface ici  
+      console.log("Déconnecté");
+    });
+    
     document.body.prepend(bannerEdition);
+    
   }
 }
 
@@ -148,18 +158,28 @@ const loginLi = document.getElementById('loginLi');
 displayModeAdmin();
 
 
+
+
+
 // Vérifier si bannerEdition existe avant d'ajouter l'écouteur d'événement
 if (bannerEdition) {
   // Affichage de la modale au clic sur Mode édition
-  bannerEdition.addEventListener("click", () => {
+  bannerEdition.addEventListener("click", (event) => {
     console.log("modeEdition");
     event.preventDefault(); 
-    containerModals.style.display = "flex";
+    containerModals.style.display = "flex";  
     loginLi.innerHTML = '<a href="#">logout</a>';
     
-  });
+});
 }
 
+
+
+
+
+
+ 
+    
 
 
 // Ferme la modale lorsque l'utilisateur clique en dehors de la modale
