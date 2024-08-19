@@ -120,14 +120,74 @@ if (localStorage.getItem("userId") && localStorage.getItem("token")) {
 }
 });*/
 
+
+
+
+
+
+// Affichage de la modale au clic sur Mode édition
+
+
+let bannerEdition;// Déclarer la variable en dehors de la fonction
+
 function displayModeAdmin () {
   if (sessionStorage.authToken) {
     console.log("ok");
-    const bannerEdition = document.createElement("div");
-    bannerEdition.className = "mode-edition";
-    bannerEdition.innerHTML = '<p><i class="fa-regular fa-pen-to-square"></i>Mode édition</p>';
+    bannerEdition = document.createElement("div"); // Supprimer le "const"
+    bannerEdition.className = "modeEdition";
+    bannerEdition.innerHTML = '<p><a href=""><i class="fa-regular fa-pen-to-square"></i>Mode édition</a></p>';
     document.body.prepend(bannerEdition);
   }
 }
 
+
+const containerModals = document.querySelector(".containerModals");
+const loginLi = document.getElementById('loginLi');
+
+
 displayModeAdmin();
+
+
+// Vérifier si bannerEdition existe avant d'ajouter l'écouteur d'événement
+if (bannerEdition) {
+  // Affichage de la modale au clic sur Mode édition
+  bannerEdition.addEventListener("click", () => {
+    console.log("modeEdition");
+    event.preventDefault(); 
+    containerModals.style.display = "flex";
+    loginLi.innerHTML = '<a href="#">logout</a>';
+    
+  });
+}
+
+
+
+// Ferme la modale lorsque l'utilisateur clique en dehors de la modale
+window.onclick = function(event) {
+  if (event.target == containerModals) {
+    containerModals.style.display = "none";
+  }
+}
+
+
+ // Ferme la modale lorsque l'utilisateur clique sur (x)
+document.addEventListener("DOMContentLoaded", function() {
+  var span = document.querySelector(".close");
+  var containerModals = document.querySelector(".containerModals");
+
+  span.addEventListener("click", function() {
+    containerModals.style.display = "none";
+  });
+});
+
+
+
+
+
+
+   
+
+
+
+
+
