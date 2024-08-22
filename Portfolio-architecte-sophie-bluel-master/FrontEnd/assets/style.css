@@ -140,7 +140,22 @@ li:hover {
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
+	
 }
+
+
+.modify {
+	display: none;
+	font-size: 14px;
+	cursor: pointer;
+}
+
+.modify p {
+	color: black;
+}
+
+
+
 .btn-filter {
 	min-width: 480px;
 	width: 50%;
@@ -321,6 +336,7 @@ footer nav ul {
  }
 .modeEdition a {
 	color: white;
+	
  }
 
 

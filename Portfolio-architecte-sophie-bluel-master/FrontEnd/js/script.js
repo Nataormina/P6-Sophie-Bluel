@@ -80,6 +80,45 @@ fetch("http://localhost:5678/api/works")
   }
 });
 
+/*const faPen = document.querySelector(".fa-pen-to-square");
+const modifySpan = document.querySelector(".modify-span");
+ // Vérifier si l'utilisateur est connecté et afficher  "span" et "modifier" en mode édition
+ if (sessionStorage.getItem("authToken")) {
+  faPen.style.display = "flex";
+  modifySpan.style.display = "flex";
+}*/
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const authToken = sessionStorage.getItem("authToken");
+
+  if (authToken) {
+    const faRegular = document.querySelector(".fa-regular");
+    const modify = document.querySelector(".modify");
+
+    if (faRegular && modify) {
+      faRegular.style.display = "block";
+      modify.style.display = "block";
+      modify.innerHTML = '<p><a href=""><i class="fa-regular fa-pen-to-square"></i>modifier</a></p>';
+
+// Ajout de l'écouteur d'événement pour ouvrir la modale
+if (modify) {
+  modify.addEventListener("click", (event) => {
+    event.preventDefault();
+    containerModals.style.display = "flex";
+  });
+  }
+
+    } else {
+      console.error("Les éléments .fa-regular ou .modify n'existent pas.");
+    }
+  } else {
+    console.error("authToken est manquant ou invalide.");
+  }
+});
+
+
+
 // Gérer le mode administrateur
 function displayModeAdmin() {
 if (sessionStorage.authToken) {
@@ -88,7 +127,7 @@ if (sessionStorage.authToken) {
   bannerEdition.className = "modeEdition";
   bannerEdition.innerHTML = '<p><a href=""><i class="fa-regular fa-pen-to-square"></i>Mode édition</a></p>';
   loginLi.innerHTML = '<a href="#">logout</a>';
-
+ 
   document.getElementById("loginLi").addEventListener("click", function(event) {
     event.preventDefault();
     sessionStorage.removeItem('authToken');
@@ -112,6 +151,9 @@ bannerEdition.addEventListener("click", (event) => {
 });
 }
 
+
+
+
 window.onclick = function(event) {
 if (event.target == containerModals) {
   containerModals.style.display = "none";
@@ -124,3 +166,6 @@ span.addEventListener("click", function() {
   containerModals.style.display = "none";
 });
 });
+
+
+
