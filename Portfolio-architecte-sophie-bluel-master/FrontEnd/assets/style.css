@@ -396,7 +396,37 @@ button:hover {
 	visibility: hidden;
 }
 
-  
+.add-photo-button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    border: 1px solid #1D6154;
+    border-radius: 25px;
+    font-family: 'Syne';
+    color: white;
+    cursor: pointer;
+    background-color: #1D6154;
+    width: 250px;
+}
+.image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.image-container img {
+    display: block;
+}
+
+.image-container .overlay-icon {
+    position: absolute;
+    top: 6px; /* Ajustez cette valeur pour placer l'icône en fonction de vos besoins */
+    right: 6px; /* Ajustez cette valeur pour placer l'icône en fonction de vos besoins */
+    font-size: 16px; /* Ajustez cette valeur pour la taille de l'icône */
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    padding: 4px;
+    border-radius: 10%;
+}
   
   
   

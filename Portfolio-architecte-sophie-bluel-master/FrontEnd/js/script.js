@@ -152,6 +152,74 @@ bannerEdition.addEventListener("click", (event) => {
 }
 
 
+  
+  
+
+  // Sélectionner le bouton "Ajouter une photo" et le conteneur pour les projets
+  const addPhotoButton = containerModals.querySelector(".add-photo-button");
+  const projetModal = containerModals.querySelector(".projetModal");
+
+
+
+
+
+ // Créer l'input file caché pour sélectionner les photos
+  const photoInput = document.createElement("input");
+  photoInput.type = "file";
+  photoInput.accept = "image/*";
+  photoInput.multiple = true;
+  photoInput.style.display = "none";
+
+  // Ajouter l'input au body pour pouvoir y accéder via le JavaScript
+  document.body.appendChild(photoInput);
+
+  // Ajouter l'écouteur d'événement pour le bouton "Ajouter une photo"
+  addPhotoButton.addEventListener("click", () => {
+    photoInput.click(); // Ouvre la boîte de dialogue pour sélectionner des fichiers
+  });
+
+  // Gérer l'ajout des photos après la sélection
+  photoInput.addEventListener("change", (event) => {
+    const files = event.target.files;
+    if (files.length > 0) {
+      // Parcourir les fichiers sélectionnés et les afficher dans la modale
+      for (const file of files) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const img = document.createElement("img");
+          img.src = e.target.result;
+          img.style.maxWidth = "100px";
+          img.style.margin = "10px";
+          projetModal.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+  });
+
+  // Liste des images à charger (basée sur les fichiers présents dans le dossier images)
+  const images = [
+   /* 'abajour-tahina.png',
+    'image2.jpg',
+    'image3.jpg',*/
+    // Ajoute ici d'autres noms de fichiers d'images
+  ];
+
+  // Chemin de base vers le dossier d'images
+  const basePath = 'images/';
+
+  // Charger les images et les afficher dans la modale
+  images.forEach((imageName) => {
+    const img = document.createElement("img");
+    img.src = `${basePath}${imageName}`;
+    img.alt = imageName;
+    img.style.maxWidth = "100px";
+    img.style.margin = "10px";
+    projetModal.appendChild(img);
+  });
+
+
+
 
 
 window.onclick = function(event) {
@@ -166,6 +234,7 @@ span.addEventListener("click", function() {
   containerModals.style.display = "none";
 });
 });
+
 
 
 

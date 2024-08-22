@@ -30,10 +30,36 @@
         <span><i class="fa-solid fa-xmark close"></i></span>
         <h2>Galerie photo</h2>
         <div class="projetModal"></div>
-        <button>Ajouter une photo</button>
+        <button  class="add-photo-button">Ajouter une photo</button>
       </div>
     </div>
-  
+   
+    
+    <h3>Ajout photo</h3>
+  <div class="form add-photo-form" style="display: none;">
+    <form id="picture-form" action="#" method="post">
+      <div class="file-section">
+        <div id="photo-container"></div>
+        <div><i class="fa-regular fa-image picture-loaded"></i></div>
+        <label class="picture-loaded" for="file">+ Ajouter photo</label>
+        <input type="file" id="file" name="file" accept="image/png, image/jpeg" />
+        <p class="picture-loaded">jpg, png : 4mo max</p>
+      </div>
+      <label for="title">Titre</label>
+      <input type="text" name="title" id="title" />
+      <label for="category">Catégorie</label>
+      <select id="category" name="category" size="1">
+        <option value="1">Objets</option>
+        <option value="2">Appartements</option>
+        <option value="3">Hotels & restaurants</option>
+      </select>
+      <hr />
+      <input type="submit" value="Valider" />
+    </form>
+  </div>
+</div>
+</div>
+</aside>
 		
     <header>
       <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
