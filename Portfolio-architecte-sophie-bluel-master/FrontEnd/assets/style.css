@@ -361,6 +361,7 @@ flex-direction: column;
 justify-content: space-around;
 align-items: center;
 position: relative;
+flex-wrap: wrap;
 }
 
 .modalPhotos img {
@@ -378,7 +379,8 @@ position: relative;
 
 .modalPhotos figure {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
+	margin: 10px;
 }
 
 .modalPhotos figcaption {
