@@ -363,6 +363,32 @@ align-items: center;
 position: relative;
 }
 
+.modalPhotos img {
+	width: 15%;
+	
+	flex-direction: row;
+	margin-left: 5%;
+	margin-right: 5%;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: 10px;
+	grid-row-gap: 20px;
+	
+}
+
+.modalPhotos figure {
+	display: flex;
+	flex-direction: row;
+}
+
+.modalPhotos figcaption {
+	display: none;
+}
+
+.modalPhotos #mainFigure1 {
+	display: block;
+}
+
 .modalPhotos h2 {
 	font-family: 'Work Sans';
 	font-weight: 400;
@@ -428,5 +454,43 @@ button:hover {
     border-radius: 10%;
 }
   
+.projetModal {
+	position: relative;
+  }
+  
+  .projetModal img {
+	position: relative;
+  }
+  
+  .projetModal .delete-icon {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+	display: ; /* Masquer l'icône de poubelle par défaut */
+  }
+  
+  .projetModal img:hover + .delete-icon {
+	display: block; /* Afficher l'icône lors du survol de l'image */
+  }
+  
+  .projetModal .image-container {
+	position: relative;
+	display: inline-block;
+  }
+
+  /* Icône de poubelle en superposition */
+.img .delete-icon {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+	display: block; /* Toujours afficher pour test */
+	z-index: 10; /* S'assurer que l'icône est au-dessus de l'image */
+  }
   
   

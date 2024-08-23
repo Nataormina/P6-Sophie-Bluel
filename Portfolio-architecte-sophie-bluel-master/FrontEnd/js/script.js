@@ -158,6 +158,35 @@ bannerEdition.addEventListener("click", (event) => {
   // Sélectionner le bouton "Ajouter une photo" et le conteneur pour les projets
   const addPhotoButton = containerModals.querySelector(".add-photo-button");
   const projetModal = containerModals.querySelector(".projetModal");
+  const modalPhotos = containerModals.querySelector(".modalPhotos");
+  
+
+ 
+// Récupération des projets avec l'API
+fetch("http://localhost:5678/api/works")
+.then((response) => response.json())
+.then((data) => {
+  // Ajout des projets dans la div gallery
+  const modalPhotos = document.querySelector(".modalPhotos");
+
+  // Création d'une boucle pour ajouter tous les projets
+  const createPhotosModal= () => {
+    for (let i = 0; i < data.length; i++) {
+      const figure = document.createElement("figure");
+      figure.id = `mainFigure-${data[i].id}`;
+      figure.innerHTML = `
+        <img src="${data[i].imageUrl}" alt="${data[i].title}" data-type="${data[i].category.name}" data-id="${data[i].id}">
+        <figcaption>${data[i].title}</figcaption>`;
+        
+      modalPhotos.appendChild(figure);
+    }
+  }
+
+  createPhotosModal();
+})
+.catch((error) => {
+  console.error("Erreur lors de la récupération des données :", error);
+});
 
 
 
@@ -193,20 +222,32 @@ bannerEdition.addEventListener("click", (event) => {
           projetModal.appendChild(img);
         };
         reader.readAsDataURL(file);
-      }
+  
     }
+  }
   });
 
-  // Liste des images à charger (basée sur les fichiers présents dans le dossier images)
+  
+ 
+ 
+
+ /* // Liste des images à charger (basée sur les fichiers présents dans le dossier images)
   const images = [
-   /* 'abajour-tahina.png',
+    
+'abajour-tahina.png',
     'image2.jpg',
-    'image3.jpg',*/
+    'image3.jpg',
     // Ajoute ici d'autres noms de fichiers d'images
-  ];
+  ];*/
+
+
+
+  
+   
 
   // Chemin de base vers le dossier d'images
   const basePath = 'images/';
+ 
 
   // Charger les images et les afficher dans la modale
   images.forEach((imageName) => {
@@ -215,11 +256,25 @@ bannerEdition.addEventListener("click", (event) => {
     img.alt = imageName;
     img.style.maxWidth = "100px";
     img.style.margin = "10px";
+
+const deleteIcon = document.createElement("img");
+    deleteIcon.src = "path/to/trash-icon.png"; // Chemin de l'icône de poubelle
+    deleteIcon.className = "delete-icon";
+
+    // Ajouter un événement pour supprimer l'image
+    deleteIcon.addEventListener("click", () => {
+      projetModal.removeChild(img);
+    });
+
+    const imageContainer = document.createElement("div");
+    imageContainer.appendChild(img);
+    imageContainer.appendChild(deleteIcon);
+
     projetModal.appendChild(img);
   });
 
-
-
+  
+  
 
 
 window.onclick = function(event) {
@@ -227,6 +282,7 @@ if (event.target == containerModals) {
   containerModals.style.display = "none";
 }
 }
+
 
 document.addEventListener("DOMContentLoaded", function() {
 var span = document.querySelector(".close");
