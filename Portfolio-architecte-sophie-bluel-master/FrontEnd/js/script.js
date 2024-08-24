@@ -3,9 +3,9 @@
 fetch("http://localhost:5678/api/works")
 .then((response) => response.json())
 .then((data) => {
-  // Ajout des projets dans la div gallery
+  // Ajout des projets dans la div gallery et dans la modale
   const gallery = document.querySelector(".gallery");
-
+  
   // Création d'une boucle pour ajouter tous les projets
   const createGalleryMain = () => {
     for (let i = 0; i < data.length; i++) {
@@ -15,6 +15,7 @@ fetch("http://localhost:5678/api/works")
         <img src="${data[i].imageUrl}" alt="${data[i].title}" data-type="${data[i].category.name}" data-id="${data[i].id}">
         <figcaption>${data[i].title}</figcaption>`;
       gallery.appendChild(figure);
+       
     }
   };
   createGalleryMain();
@@ -167,13 +168,13 @@ fetch("http://localhost:5678/api/works")
 .then((response) => response.json())
 .then((data) => {
   // Ajout des projets dans la div gallery
-  const modalPhotos = document.querySelector(".modalPhotos");
+  const modalPhotos = document.querySelector(".projetModal");
 
   // Création d'une boucle pour ajouter tous les projets
   const createPhotosModal= () => {
     for (let i = 0; i < data.length; i++) {
       const figure = document.createElement("figure");
-      figure.id = `mainFigure-${data[i].id}`;
+      //figure.id = `mainFigure-${data[i].id}`;
       figure.innerHTML = `
         <img src="${data[i].imageUrl}" alt="${data[i].title}" data-type="${data[i].category.name}" data-id="${data[i].id}">
         <figcaption>${data[i].title}</figcaption>`;

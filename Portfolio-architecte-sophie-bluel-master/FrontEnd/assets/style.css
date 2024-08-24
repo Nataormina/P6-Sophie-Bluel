@@ -353,15 +353,15 @@ footer nav ul {
 
 .modalPhotos {
 background-color: #FFF;
-width: 50%;
-height: 50%;
+width: 630px;
+height: 688px;
 border-radius: 5px;
 display: flex;
 flex-direction: column;
 justify-content: space-around;
 align-items: center;
 position: relative;
-flex-wrap: wrap;
+padding: 25px;
 }
 
 .modalPhotos img {
@@ -377,7 +377,7 @@ flex-wrap: wrap;
 	
 }
 
-.modalPhotos figure {
+.modalPhotos figure #figuremain{
 	display: flex;
 	flex-direction: column;
 	margin: 10px;
@@ -387,16 +387,18 @@ flex-wrap: wrap;
 	display: none;
 }
 
-.modalPhotos #mainFigure1 {
-	display: block;
-}
+
+
 
 .modalPhotos h2 {
 	font-family: 'Work Sans';
 	font-weight: 400;
 	color: black;
 	font-size: 26px;
+	padding-top: 10px;
 }
+
+
 
 .fa-xmark {
 	position: absolute;
@@ -455,13 +457,19 @@ button:hover {
     padding: 4px;
     border-radius: 10%;
 }
-  
+
+
 .projetModal {
-	position: relative;
-  }
-  
+	width: 100%;
+	display: grid;
+	grid-template-columns: 7fr 7fr 7fr 7fr 7fr;
+}
+
   .projetModal img {
 	position: relative;
+	width: 76.86px;
+	height: 102.57px;
+	margin: 10px;
   }
   
   .projetModal .delete-icon {
