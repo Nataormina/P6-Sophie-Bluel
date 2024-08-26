@@ -193,7 +193,19 @@ fetch("http://localhost:5678/api/works")
 });
 
 
-
+window.onclick = function(event) {
+  if (event.target == containerModals) {
+    containerModals.style.display = "none";
+  }
+  }
+  
+  
+  document.addEventListener("DOMContentLoaded", function() {
+  var span = document.querySelector(".close");
+  span.addEventListener("click", function() {
+    containerModals.style.display = "none";
+  });
+  });
 
 
  // Créer l'input file caché pour sélectionner les photos
@@ -281,19 +293,7 @@ const deleteIcon = document.createElement("img");
   
 
 
-window.onclick = function(event) {
-if (event.target == containerModals) {
-  containerModals.style.display = "none";
-}
-}
 
-
-document.addEventListener("DOMContentLoaded", function() {
-var span = document.querySelector(".close");
-span.addEventListener("click", function() {
-  containerModals.style.display = "none";
-});
-});
 
 
 

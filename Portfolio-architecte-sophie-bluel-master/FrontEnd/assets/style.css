@@ -140,8 +140,12 @@ li:hover {
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
-	
+	display: flex;
+    justify-content: center;
+	gap: 10px;
 }
+	
+
 
 
 .modify {
@@ -336,7 +340,9 @@ footer nav ul {
  }
 .modeEdition a {
 	color: white;
-	
+	display: flex;
+    justify-content: center;
+    align-items: baseline;
  }
 
 
@@ -469,6 +475,7 @@ hr {
 	width: 100%;
 	display: grid;
 	grid-template-columns: 7fr 7fr 7fr 7fr 7fr;
+	position: relative;
 }
 
   .projetModal img {
@@ -480,36 +487,30 @@ hr {
   
   .projetModal .overlay-icon {
 
-	top: 5px;
-	right: 5px;
-	width: 17px;
-	height: 17px;
+	margin-top: 14px;
+	margin-left: -20px;
+	right: 34px;
+	width: 9px;
+	height: 11px;
 	background-color: black;
 	color: white;
 	cursor: pointer;
 	display: flex;
 	justify-content: center;
-  }
-  
-  .projetModal img:hover + .overlay-icon {
-	display: block; /* Afficher l'icône lors du survol de l'image */
-  }
-  
-  .projetModal .image-container {
-	position: relative;
-	display: inline-block;
-  }
-
-  /* Icône de poubelle en superposition */
-.img .delete-icon {
+	align-items: center;
 	position: absolute;
-	top: 5px;
-	right: 5px;
-	width: 20px;
-	height: 20px;
-	cursor: pointer;
-	display: block; /* Toujours afficher pour test */
-	z-index: 10; /* S'assurer que l'icône est au-dessus de l'image */
-  }
+	z-index: 1;
+	padding: 9px;
+    font-size: 10px;
+	border-radius: 5%;
+}
+  
+
+ 
+  
+  
+  
+
+
   
   
