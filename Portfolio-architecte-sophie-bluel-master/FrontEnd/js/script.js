@@ -175,9 +175,12 @@ fetch("http://localhost:5678/api/works")
     for (let i = 0; i < data.length; i++) {
       const figure = document.createElement("figure");
       //figure.id = `mainFigure-${data[i].id}`;
-      figure.innerHTML = `
+      figure.innerHTML = `<div class="projetModal">
         <img src="${data[i].imageUrl}" alt="${data[i].title}" data-type="${data[i].category.name}" data-id="${data[i].id}">
-        <figcaption>${data[i].title}</figcaption>`;
+        <figcaption>${data[i].title}</figcaption>
+        <i class="fa-solid fa-trash-can overlay-icon"></i>
+        </div>
+        `
         
       modalPhotos.appendChild(figure);
     }
