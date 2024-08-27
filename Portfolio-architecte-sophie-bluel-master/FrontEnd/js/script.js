@@ -234,7 +234,7 @@ window.onclick = function(event) {
   });
 
 
- // Créer l'input file caché pour sélectionner les photos
+/* // Créer l'input file caché pour sélectionner les photos
   const photoInput = document.createElement("input");
   photoInput.type = "file";
   photoInput.accept = "image/*";
@@ -296,8 +296,33 @@ const deleteIcon = document.createElement("img");
     imageContainer.appendChild(deleteIcon);
 
     projetModal.appendChild(img);
-  });
+  });*/
 
+
+
+
+// Sélectionner l'élément nécessaire
+const addPhotoForm = document.querySelector(".add-photo-form");
+
+
+// Ajouter l'écouteur d'événement pour le bouton "Ajouter une photo"
+addPhotoButton.addEventListener("click", () => {
+  // Masquer la galerie de la modale
+  projetModal.style.display = "none";
+
+  // Afficher le formulaire d'ajout de photo
+  addPhotoForm.style.display = "block";
+});
+
+// Ajouter l'écouteur d'événements pour soumettre le formulaire
+const pictureForm = document.getElementById("picture-form");
+
+pictureForm.addEventListener("submit", (event) => {
+  event.preventDefault();  // Empêche la soumission du formulaire par défaut
+
+  // Vous pouvez ajouter ici la logique pour traiter le formulaire, comme uploader l'image
   
-
- 
+  // Après la soumission du formulaire, vous pouvez masquer le formulaire et revenir à la galerie
+  addPhotoForm.style.display = "none";
+  projetModal.style.display = "block";  // Réafficher la galerie
+});
