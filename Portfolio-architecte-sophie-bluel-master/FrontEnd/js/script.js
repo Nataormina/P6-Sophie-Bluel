@@ -18,7 +18,11 @@ fetch("http://localhost:5678/api/works")
        
     }
   };
+  
   createGalleryMain();
+
+   
+
 
   // Création des filtres
   const portfolio = document.getElementById("portfolio");
@@ -152,8 +156,6 @@ bannerEdition.addEventListener("click", (event) => {
 });
 }
 
-
-  
   
 
   // Sélectionner le bouton "Ajouter une photo" et le conteneur pour les projets
@@ -188,10 +190,34 @@ fetch("http://localhost:5678/api/works")
 
   createPhotosModal();
 })
+
 .catch((error) => {
   console.error("Erreur lors de la récupération des données :", error);
 });
 
+// Fonction pour supprimer un projet du DOM
+const deleteImageFromModal = (e) => {
+  if (e.target.classList.contains('fa-trash-can')) {
+    const figureElement = e.target.closest('figure');  // Trouver l'élément figure parent
+    figureElement.remove();  // Supprimer l'élément du DOM
+    console.log(`Image avec l'ID ${figureElement.dataset.id} supprimée du DOM.`);
+  }
+};
+
+// Récupération des projets avec l'API et création de la galerie dans la modale
+fetch("http://localhost:5678/api/works")
+  .then(response => response.json())
+  .then(data => {
+    createPhotosModal(data);  // Créer dynamiquement les éléments dans la modale
+  })
+  .catch(error => {
+    console.error("Erreur lors de la récupération des données :", error);
+  });
+
+// Ajout de l'écouteur d'événements sur la modale pour la suppression des images
+document.querySelector(".projetModal").addEventListener('click', deleteImageFromModal);
+
+  
 
 window.onclick = function(event) {
   if (event.target == containerModals) {
@@ -243,24 +269,7 @@ window.onclick = function(event) {
   }
   });
 
-  
- 
- 
-
- /* // Liste des images à charger (basée sur les fichiers présents dans le dossier images)
-  const images = [
-    
-'abajour-tahina.png',
-    'image2.jpg',
-    'image3.jpg',
-    // Ajoute ici d'autres noms de fichiers d'images
-  ];*/
-
-
-
-  
    
-
   // Chemin de base vers le dossier d'images
   const basePath = 'images/';
  
@@ -290,11 +299,5 @@ const deleteIcon = document.createElement("img");
   });
 
   
-  
 
-
-
-
-
-
-
+ 

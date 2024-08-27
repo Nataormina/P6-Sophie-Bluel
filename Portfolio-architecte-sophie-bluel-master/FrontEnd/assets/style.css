@@ -142,10 +142,12 @@ li:hover {
 	margin-bottom: 1em;
 	display: flex;
     justify-content: center;
-	gap: 10px;
+	gap: 20px;
 }
 	
-
+.fa-pen-to-square {
+	padding-right: 10px;
+}
 
 
 .modify {
