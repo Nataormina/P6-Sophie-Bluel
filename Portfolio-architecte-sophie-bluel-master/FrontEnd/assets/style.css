@@ -515,28 +515,38 @@ hr {
 	text-align: center;
 	
 }
-.form h2{
-	margin-bottom: 20px;
+.form h3{
+	margin-top: 70px;
+	margin-bottom: 40px;
+	font-size: 26px;
 }
 .form form {
 	text-align: left;
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
+	width: 630px;
+    height: 670px;
+	align-items: baseline;
 }
 
+
+
 .form input {
-	height: 50px;
+	width: 420px;
+    height: 51px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
 .form select {
-	height: 50px;
+	width: 420px;
+    height: 51px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	margin-bottom: 50px;
 }
 
 .form label {
@@ -547,20 +557,59 @@ hr {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 .add-photo-form {
-	width: 70%;
+	width: 60%;
+	background-color: white;
+	align-items: center;
+	border-radius: 10px;
 }
+
 input[type="submit"]{
+	width: 237px;
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
 	background-color: #1D6154;
-	margin : 2em auto ;
-	width: 180px;
+	margin : 2em auto;
 	text-align: center;
-	border-radius: 60px ;
+	border-radius: 60px;
 }
 
- 
+.file-section {
+	background-color: #E8F1F6;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 10px;
+	margin-left: 110px;
+	width: 420px;
+	height: 169px;
+}
+
+.file-section label {
+	padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 25px;
+    font-family: 'Syne';
+    color: white;
+    cursor: pointer;
+    background-color: #B9C5CC;
+	color: #306685;
+    width: 170px;
+	text-align: center;
+}
+
+.fa-image {
+	color: #B9C5CC;
+	font-size: 50px;
+	margin-top: 5px;
+}
+
+#photo-container {
+	width: 80%;
+}
+#photo-container img {
+	width: 100%;
+}
   
   
   
