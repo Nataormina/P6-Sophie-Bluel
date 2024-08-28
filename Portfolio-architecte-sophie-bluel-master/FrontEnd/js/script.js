@@ -195,15 +195,59 @@ fetch("http://localhost:5678/api/works")
   console.error("Erreur lors de la récupération des données :", error);
 });
 
+
+
 // Fonction pour supprimer un projet du DOM
 const deleteImageFromModal = (e) => {
   if (e.target.classList.contains('fa-trash-can')) {
     const figureElement = e.target.closest('figure');  // Trouver l'élément figure parent
+    const imageId = figureElement.querySelector('img').dataset.id;  // Récupérer l'ID de l'image
     figureElement.remove();  // Supprimer l'élément du DOM
-    console.log(`Image avec l'ID ${figureElement.dataset.id} supprimée du DOM.`);
-  }
-};
+    // Supprimer l'image correspondante de la page d'accueil
+    const homepageImage = document.querySelector(`.gallery .figure img[data-id="${imageId}"]`).closest('figure');
+    if (homepageImage) {
+    homepageImage.remove();  // Supprimer l'image du DOM de la page d'accueil
+    } 
+    
 
+    //console.log(`Image avec l'ID ${figureElement.dataset.id} supprimée du DOM.`);
+    console.log(`Image avec l'ID ${imageId} supprimée du DOM.`);
+  }
+}
+
+
+
+
+
+
+// Fonction pour supprimer un projet via l'API
+async function deleteWork(event) {
+  even.stopPropagation();
+  const id = event.srcElement.id;
+  const deleteApi = "http://localhost:5678/api/works/";
+  const token = sessionStorage.authToken;
+  let response = await fetch(deleteApi + id, {
+    method: "DELETE",
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+
+  if (response.status == 401 || response.status == 500) {
+    const errorBox = document.createElement("div");
+    errorBox.className = "error-login";
+    errorBox.innerHTML = "Il y a eu une erreur";
+    document.querySelector(".projetModal").prepend(errorBox);
+  } else {
+    //let result = await response.json();
+    console.log(`Projet avec l'ID ${id} supprimé de l'API.`);
+  }
+}
+
+
+
+
+	
 // Récupération des projets avec l'API et création de la galerie dans la modale
 fetch("http://localhost:5678/api/works")
   .then(response => response.json())
@@ -218,6 +262,8 @@ fetch("http://localhost:5678/api/works")
 document.querySelector(".projetModal").addEventListener('click', deleteImageFromModal);
 
   
+
+
 
 window.onclick = function(event) {
   if (event.target == containerModals) {
