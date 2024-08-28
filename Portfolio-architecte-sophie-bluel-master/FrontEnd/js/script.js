@@ -246,7 +246,7 @@ const addPhotoForm = document.querySelector(".add-photo-form");
 // Ajouter l'écouteur d'événement pour le bouton "Ajouter une photo"
 addPhotoButton.addEventListener("click", () => {
   // Masquer la galerie de la modale
-  projetModal.style.display = "none";
+  modalPhotos.style.display = "none";
 
   // Afficher le formulaire d'ajout de photo
   addPhotoForm.style.display = "block";
