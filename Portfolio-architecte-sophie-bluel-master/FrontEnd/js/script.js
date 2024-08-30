@@ -16,12 +16,12 @@ fetch("http://localhost:5678/api/works")
         <figcaption>${data[i].title}</figcaption>`;
       gallery.appendChild(figure);
        
+
+      
     }
   };
-  
-  createGalleryMain();
 
-   
+  createGalleryMain();
 
 
   // Création des filtres
@@ -85,13 +85,6 @@ fetch("http://localhost:5678/api/works")
   }
 });
 
-/*const faPen = document.querySelector(".fa-pen-to-square");
-const modifySpan = document.querySelector(".modify-span");
- // Vérifier si l'utilisateur est connecté et afficher  "span" et "modifier" en mode édition
- if (sessionStorage.getItem("authToken")) {
-  faPen.style.display = "flex";
-  modifySpan.style.display = "flex";
-}*/
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -127,7 +120,7 @@ if (modify) {
 // Gérer le mode administrateur
 function displayModeAdmin() {
 if (sessionStorage.authToken) {
-  console.log("ok");
+  
   bannerEdition = document.createElement("div"); // Créer la bannière
   bannerEdition.className = "modeEdition";
   bannerEdition.innerHTML = '<p><a href=""><i class="fa-regular fa-pen-to-square"></i>Mode édition</a></p>';
@@ -172,6 +165,19 @@ fetch("http://localhost:5678/api/works")
   // Ajout des projets dans la div gallery
   const modalPhotos = document.querySelector(".projetModal");
 
+
+  /*fetch("http://localhost:5678/api/works")
+  .then((response) => response.json())
+  .then((data) => {
+    console.log("Données récupérées :", data); // Vérifie les données
+    createGalleryMain(data); // Si les données sont correctes, crée la galerie
+  })
+  .catch((error) => {
+    console.error("Erreur lors de la récupération des projets :", error);
+  });*/
+
+ 
+
   // Création d'une boucle pour ajouter tous les projets
   const createPhotosModal= () => {
     for (let i = 0; i < data.length; i++) {
@@ -197,7 +203,7 @@ fetch("http://localhost:5678/api/works")
 
 
 
-// Fonction pour supprimer un projet du DOM
+/*// Fonction pour supprimer un projet du DOM
 const deleteImageFromModal = (e) => {
   if (e.target.classList.contains('fa-trash-can')) {
     const figureElement = e.target.closest('figure');  // Trouver l'élément figure parent
@@ -216,6 +222,12 @@ const deleteImageFromModal = (e) => {
 }
 
 
+  
+  
+
+
+// Ajout de l'écouteur d'événements sur la modale pour la suppression des images
+document.querySelector(".projetModal").addEventListener('click', deleteImageFromModal);
 
 
 
@@ -247,7 +259,7 @@ async function deleteWork(event) {
 
 
 
-	
+  
 // Récupération des projets avec l'API et création de la galerie dans la modale
 fetch("http://localhost:5678/api/works")
   .then(response => response.json())
@@ -259,7 +271,47 @@ fetch("http://localhost:5678/api/works")
   });
 
 // Ajout de l'écouteur d'événements sur la modale pour la suppression des images
+document.querySelector(".projetModal").addEventListener('click', deleteImageFromModal);*/
+
+
+// Fonction pour supprimer un projet du DOM
+const deleteImageFromModal = async (e) => {
+  if (e.target.classList.contains('fa-trash-can')) {
+    const figureElement = e.target.closest('figure');  // Trouver l'élément figure parent
+    const imageId = figureElement.querySelector('img').dataset.id;  // Récupérer l'ID de l'image
+
+    // Suppression de l'image de la modale
+    figureElement.remove();
+
+    // Supprimer l'image correspondante de la galerie sur la page d'accueil
+    const homepageImage = document.querySelector(`.gallery img[data-id="${imageId}"]`);
+    if (homepageImage) {
+      homepageImage.closest('figure').remove();
+    }
+
+    // Appel à l'API pour supprimer le projet
+    try {
+      const response = await fetch(`http://localhost:5678/api/works/${imageId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${sessionStorage.getItem('authToken')}`
+        }
+      });
+
+      if (response.ok) {
+        console.log(`Projet avec l'ID ${imageId} supprimé de l'API.`);
+      } else {
+        console.error('Erreur lors de la suppression du projet via l\'API');
+      }
+    } catch (error) {
+      console.error('Erreur lors de la connexion à l\'API:', error);
+    }
+  }
+};
+
+// Ajout de l'écouteur d'événements sur la modale pour la suppression des images
 document.querySelector(".projetModal").addEventListener('click', deleteImageFromModal);
+
 
   
 
@@ -293,6 +345,7 @@ const addPhotoForm = document.querySelector(".add-photo-form");
 addPhotoButton.addEventListener("click", () => {
   // Masquer la galerie de la modale
   modalPhotos.style.display = "none";
+  
 
   // Afficher le formulaire d'ajout de photo
   addPhotoForm.style.display = "block";
@@ -310,3 +363,72 @@ pictureForm.addEventListener("submit", (event) => {
   addPhotoForm.style.display = "none";
   projetModal.style.display = "block";  // Réafficher la galerie
 });
+
+
+// Ajouter l'écouteur d'événement pour la soumission du formulaire
+addPhotoForm.addEventListener("submit", async (event) => {
+  event.preventDefault();  // Empêcher la soumission par défaut du formulaire
+
+  // Récupérer les données du formulaire
+  const title = document.getElementById('photo-title').value;
+  const category = document.getElementById('photo-category').value;
+  const fileInput = document.getElementById('photo-file');
+  const file = fileInput.files[0];
+
+  // Créer un FormData pour l'envoi des données à l'API
+  const formData = new FormData();
+  formData.append('title', title);
+  formData.append('category', category);
+  formData.append('file', file);
+
+  try {
+    const response = await fetch("http://localhost:5678/api/works", {
+      method: "POST",
+      headers: {
+        'Authorization': `Bearer ${sessionStorage.getItem('authToken')}`
+      },
+      body: formData
+    });
+
+    if (response.ok) {
+      const gallery = await response.json();
+
+      // Créer dynamiquement un nouvel élément pour la galerie
+      const newGalleryMain = () => {
+        for (let i = 0; i < data.length; i++) {
+      const figure = document.createElement("figure");
+      figure.id = `mainFigure-${data[i].id}`;
+      figure.innerHTML = `
+        <img src="${data[i].imageUrl}" alt="${data[i].title}" data-type="${data[i].category.name}" data-id="${data[i].id}">
+        <figcaption>${data[i].title}</figcaption>`;
+      gallery.appendChild(figure);
+        //<i class="fa-solid fa-trash-can overlay-icon"></i>`;
+
+      }
+    };
+  
+  
+
+      
+      // Ajouter la nouvelle photo à la galerie
+      modalPhotos.appendChild(figure);
+      projetModal.appendChild(figure.cloneNode(true));  // Ajouter également à la galerie principale
+      
+      console.log("Nouvelle photo ajoutée avec succès.");
+
+      // Réinitialiser et masquer le formulaire
+      addPhotoForm.reset();
+      addPhotoForm.style.display = "none";
+      modalPhotos.style.display = "block";  // Réafficher la galerie
+
+    } else {
+      console.error("Erreur lors de l'ajout de la photo via l'API.");
+    }
+  } catch (error) {
+    console.error("Erreur lors de la connexion à l'API :", error);
+  }
+});
+
+newGalleryMain();
+
+
