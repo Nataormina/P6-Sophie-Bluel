@@ -535,9 +535,7 @@ hr {
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
-	width: 630px;
-    height: 670px;
-	align-items: baseline;
+	align-items: center;
 }
 
 
@@ -589,14 +587,12 @@ input[type="submit"] :active {
 
 
 .file-section {
+	width: 70%;
 	background-color: #E8F1F6;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	padding: 10px;
-	margin-left: 110px;
-	width: 420px;
-	height: 169px;
 }
 
 .file-section label {

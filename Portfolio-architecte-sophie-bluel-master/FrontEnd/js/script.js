@@ -16,8 +16,6 @@ fetch("http://localhost:5678/api/works")
         <figcaption>${data[i].title}</figcaption>`;
       gallery.appendChild(figure);
        
-
-      
     }
   };
 
@@ -166,16 +164,6 @@ fetch("http://localhost:5678/api/works")
   const modalPhotos = document.querySelector(".projetModal");
 
 
-  /*fetch("http://localhost:5678/api/works")
-  .then((response) => response.json())
-  .then((data) => {
-    console.log("Données récupérées :", data); // Vérifie les données
-    createGalleryMain(data); // Si les données sont correctes, crée la galerie
-  })
-  .catch((error) => {
-    console.error("Erreur lors de la récupération des projets :", error);
-  });*/
-
  
 
   // Création d'une boucle pour ajouter tous les projets
@@ -202,76 +190,6 @@ fetch("http://localhost:5678/api/works")
 });
 
 
-
-/*// Fonction pour supprimer un projet du DOM
-const deleteImageFromModal = (e) => {
-  if (e.target.classList.contains('fa-trash-can')) {
-    const figureElement = e.target.closest('figure');  // Trouver l'élément figure parent
-    const imageId = figureElement.querySelector('img').dataset.id;  // Récupérer l'ID de l'image
-    figureElement.remove();  // Supprimer l'élément du DOM
-    // Supprimer l'image correspondante de la page d'accueil
-    const homepageImage = document.querySelector(`.gallery .figure img[data-id="${imageId}"]`).closest('figure');
-    if (homepageImage) {
-    homepageImage.remove();  // Supprimer l'image du DOM de la page d'accueil
-    } 
-    
-
-    //console.log(`Image avec l'ID ${figureElement.dataset.id} supprimée du DOM.`);
-    console.log(`Image avec l'ID ${imageId} supprimée du DOM.`);
-  }
-}
-
-
-  
-  
-
-
-// Ajout de l'écouteur d'événements sur la modale pour la suppression des images
-document.querySelector(".projetModal").addEventListener('click', deleteImageFromModal);
-
-
-
-
-// Fonction pour supprimer un projet via l'API
-async function deleteWork(event) {
-  even.stopPropagation();
-  const id = event.srcElement.id;
-  const deleteApi = "http://localhost:5678/api/works/";
-  const token = sessionStorage.authToken;
-  let response = await fetch(deleteApi + id, {
-    method: "DELETE",
-    headers: {
-      Authorization: "Bearer " + token,
-    },
-  });
-
-  if (response.status == 401 || response.status == 500) {
-    const errorBox = document.createElement("div");
-    errorBox.className = "error-login";
-    errorBox.innerHTML = "Il y a eu une erreur";
-    document.querySelector(".projetModal").prepend(errorBox);
-  } else {
-    //let result = await response.json();
-    console.log(`Projet avec l'ID ${id} supprimé de l'API.`);
-  }
-}
-
-
-
-
-  
-// Récupération des projets avec l'API et création de la galerie dans la modale
-fetch("http://localhost:5678/api/works")
-  .then(response => response.json())
-  .then(data => {
-    createPhotosModal(data);  // Créer dynamiquement les éléments dans la modale
-  })
-  .catch(error => {
-    console.error("Erreur lors de la récupération des données :", error);
-  });
-
-// Ajout de l'écouteur d'événements sur la modale pour la suppression des images
-document.querySelector(".projetModal").addEventListener('click', deleteImageFromModal);*/
 
 
 // Fonction pour supprimer un projet du DOM
@@ -408,7 +326,7 @@ addPhotoForm.addEventListener("submit", async (event) => {
     };
   
   
-
+    newGalleryMain();
       
       // Ajouter la nouvelle photo à la galerie
       modalPhotos.appendChild(figure);
@@ -424,11 +342,11 @@ addPhotoForm.addEventListener("submit", async (event) => {
     } else {
       console.error("Erreur lors de l'ajout de la photo via l'API.");
     }
+    
   } catch (error) {
     console.error("Erreur lors de la connexion à l'API :", error);
   }
 });
 
-newGalleryMain();
 
 
