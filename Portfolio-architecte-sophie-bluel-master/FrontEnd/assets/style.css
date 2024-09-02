@@ -442,7 +442,7 @@ button:hover {
 
 hr {
 	border: 1px solid #B3B3B3;
-	width: 420px;
+	width: 70%;
 	justify-content: center;
 }
 
@@ -541,7 +541,7 @@ hr {
 
 
 .form input {
-	width: 420px;
+	width: 70%;
     height: 51px;
 	font-size: 1.2em;
 	border: none;
@@ -549,7 +549,7 @@ hr {
 }
 
 .form select {
-	width: 420px;
+	width: 70%;
     height: 51px;
 	font-size: 1.2em;
 	border: none;
