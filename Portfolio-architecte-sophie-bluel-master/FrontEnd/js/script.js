@@ -231,16 +231,12 @@ const deleteImageFromModal = async (e) => {
 document.querySelector(".projetModal").addEventListener('click', deleteImageFromModal);
 
 
-  
-
-
 
 window.onclick = function(event) {
   if (event.target == containerModals) {
     containerModals.style.display = "none";
   }
   }
-  
   
   document.addEventListener("DOMContentLoaded", function() {
   var span = document.querySelector(".close");
@@ -251,11 +247,7 @@ window.onclick = function(event) {
 
 
 
-
-
-
-
-// Sélectionner l'élément nécessaire
+/*// Sélectionner l'élément nécessaire
 const addPhotoForm = document.querySelector(".add-photo-form");
 
 
@@ -297,14 +289,23 @@ addPhotoForm.addEventListener("submit", async (event) => {
   const formData = new FormData();
   formData.append('title', title);
   formData.append('category', category);
-  formData.append('file', file);
+  formData.append('image', file);
 
+ 
+
+
+  
+  
   try {
     const response = await fetch("http://localhost:5678/api/works", {
+ 
+
       method: "POST",
-      headers: {
-        'Authorization': `Bearer ${sessionStorage.getItem('authToken')}`
-      },
+headers: {
+  'Authorization': `Bearer ${sessionStorage.getItem('authToken')},`
+  //"content-type": "application/json",
+},
+
       body: formData
     });
 
@@ -321,16 +322,19 @@ addPhotoForm.addEventListener("submit", async (event) => {
         <figcaption>${data[i].title}</figcaption>`;
       gallery.appendChild(figure);
         //<i class="fa-solid fa-trash-can overlay-icon"></i>`;
+         return figure;
 
       }
     };
   
-  
     newGalleryMain();
+
+   
       
       // Ajouter la nouvelle photo à la galerie
-      modalPhotos.appendChild(figure);
+      modalPhotos.appendChild(figure.cloneNode(true));
       projetModal.appendChild(figure.cloneNode(true));  // Ajouter également à la galerie principale
+       
       
       console.log("Nouvelle photo ajoutée avec succès.");
 
@@ -338,6 +342,7 @@ addPhotoForm.addEventListener("submit", async (event) => {
       addPhotoForm.reset();
       addPhotoForm.style.display = "none";
       modalPhotos.style.display = "block";  // Réafficher la galerie
+     
 
     } else {
       console.error("Erreur lors de l'ajout de la photo via l'API.");
@@ -346,6 +351,86 @@ addPhotoForm.addEventListener("submit", async (event) => {
   } catch (error) {
     console.error("Erreur lors de la connexion à l'API :", error);
   }
+});*/
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  const addPhotoForm = document.querySelector(".add-photo-form");
+  const addPhotoButton = document.querySelector(".add-photo-button");
+  const modalPhotos = document.querySelector(".modalPhotos");
+  const projetModal = document.querySelector(".projetModal");
+
+  // Ajouter l'écouteur d'événement pour le bouton "Ajouter une photo"
+  addPhotoButton.addEventListener("click", () => {
+    // Masquer la galerie de la modale
+    modalPhotos.style.display = "none";
+    // Afficher le formulaire d'ajout de photo
+    addPhotoForm.style.display = "block";
+  });
+
+  addPhotoForm.addEventListener("submit", async (event) => {
+    event.preventDefault();  // Empêche la soumission par défaut du formulaire
+
+    // Récupérer les données du formulaire
+    const title = document.getElementById('photo-title').value;
+    const category = document.getElementById('photo-category').value;
+    const fileInput = document.getElementById('photo-file');
+    const file = fileInput.files[0];
+
+  
+
+    // Vérifiez que toutes les données nécessaires sont bien présentes
+    if (!title || !category || !file) {
+      console.error("Toutes les données du formulaire doivent être fournies.");
+      return;
+    }
+
+    // Créer un FormData pour l'envoi des données à l'API
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('category', category);
+    formData.append('image', file);
+
+  
+    try {
+      const response = await fetch("http://localhost:5678/api/works", {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${sessionStorage.getItem('authToken')}`
+        },
+        body: formData
+      });
+
+      if (response.ok) {
+        const newWork = await response.json();
+        console.log("Nouvelle photo ajoutée avec succès :", newWork);
+
+        // Créer dynamiquement un nouvel élément pour la galerie
+        const figure = document.createElement("figure");
+        figure.id = `mainFigure-${newWork.id}`;
+        figure.innerHTML = `
+          <img src="${newWork.imageUrl}" alt="${newWork.title}" data-type="${newWork.category.name}" data-id="${newWork.id}">
+          <figcaption>${newWork.title}</figcaption>`;
+        
+        // Ajouter la nouvelle photo à la galerie
+        modalPhotos.appendChild(figure);
+        projetModal.appendChild(figure.cloneNode(true));  // Ajouter également à la galerie principale
+
+        // Réinitialiser et masquer le formulaire
+        addPhotoForm.reset();
+        addPhotoForm.style.display = "none";
+        modalPhotos.style.display = "block";  // Réafficher la galerie
+      } else {
+        console.error("Erreur lors de l'ajout de la photo via l'API.");
+      }
+
+    } catch (error) {
+      console.error("Erreur lors de la connexion à l'API :", error);
+    }
+  });
 });
 
 
