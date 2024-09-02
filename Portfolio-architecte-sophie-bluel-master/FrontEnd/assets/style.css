@@ -621,8 +621,16 @@ input[type="submit"] :active {
 	width: 100%;
 }
   
-  
-  
+.modal-back {
+	border: none;
+	cursor: pointer;
+	background-color: white;
+}
+ 
+.modal-back:hover {
+	background-color: white;
+}
+
 
 
   
