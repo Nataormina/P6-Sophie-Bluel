@@ -323,16 +323,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Sélection de l'icône de fermeture par ID
+  // Sélection de l'icône de retouren arrière avec la flèche gauche par ID
   const closeModalBack = document.getElementById("modal-back");
   const addPhotoForm = document.querySelector(".add-photo-form");
   const modalPhotos = document.querySelector(".modalPhotos");
 
-  // Vérifier si l'icône de fermeture est bien sélectionnée
+  // Vérifier si l'icône de retour en arrière flèche gauche est bien sélectionnée
   if (closeModalBack) {
     
     
-    // Ajouter l'événement de fermeture
+    // Ajouter l'événement de retour à la modale précédente
     closeModalBack.addEventListener("click", function () {
       
       
@@ -349,7 +349,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-
+// Fermeture du formulaire au click sur la croix
 document.getElementById("close-icon").addEventListener("click", function() {
   document.querySelector(".add-photo-form").style.display = "none";
   console.log("Formulaire fermé");
