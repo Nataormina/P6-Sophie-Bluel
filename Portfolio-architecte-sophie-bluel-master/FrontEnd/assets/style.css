@@ -414,6 +414,8 @@ padding: 25px;
 	color: black;
 	font-size: 26px;
 	padding-top: 10px;
+	display: flex;
+	justify-content: center;
 }
 
 
@@ -460,6 +462,8 @@ hr {
     cursor: pointer;
     background-color: #1D6154;
     width: 250px;
+	display: flex;
+    justify-content: center;
 }
 .image-container {
     position: relative;
@@ -525,6 +529,12 @@ hr {
 	text-align: center;
 	
 }
+
+.form .fa-xmark {
+	position: relative;
+	font-size: medium;
+}
+
 .form h3{
 	margin-top: 70px;
 	margin-bottom: 40px;

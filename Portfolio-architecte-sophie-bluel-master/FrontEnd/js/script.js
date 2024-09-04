@@ -221,6 +221,7 @@ const deleteImageFromModal = async (e) => {
 document
   .querySelector(".projetModal")
   .addEventListener("click", deleteImageFromModal);
+  
 
 window.onclick = function (event) {
   if (event.target == containerModals) {
@@ -235,111 +236,10 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-/*// Sélectionner l'élément nécessaire
-const addPhotoForm = document.querySelector(".add-photo-form");
 
 
-// Ajouter l'écouteur d'événement pour le bouton "Ajouter une photo"
-addPhotoButton.addEventListener("click", () => {
-  // Masquer la galerie de la modale
-  modalPhotos.style.display = "none";
-  
-
-  // Afficher le formulaire d'ajout de photo
-  addPhotoForm.style.display = "block";
-});
-
-// Ajouter l'écouteur d'événements pour soumettre le formulaire
-const pictureForm = document.getElementById("picture-form");
-
-pictureForm.addEventListener("submit", (event) => {
-  event.preventDefault();  // Empêche la soumission du formulaire par défaut
-
-  // Vous pouvez ajouter ici la logique pour traiter le formulaire, comme uploader l'image
-  
-  // Après la soumission du formulaire, vous pouvez masquer le formulaire et revenir à la galerie
-  addPhotoForm.style.display = "none";
-  projetModal.style.display = "block";  // Réafficher la galerie
-});
 
 
-// Ajouter l'écouteur d'événement pour la soumission du formulaire
-addPhotoForm.addEventListener("submit", async (event) => {
-  event.preventDefault();  // Empêcher la soumission par défaut du formulaire
-
-  // Récupérer les données du formulaire
-  const title = document.getElementById('photo-title').value;
-  const category = document.getElementById('photo-category').value;
-  const fileInput = document.getElementById('photo-file');
-  const file = fileInput.files[0];
-
-  // Créer un FormData pour l'envoi des données à l'API
-  const formData = new FormData();
-  formData.append('title', title);
-  formData.append('category', category);
-  formData.append('image', file);
-
- 
-
-
-  
-  
-  try {
-    const response = await fetch("http://localhost:5678/api/works", {
- 
-
-      method: "POST",
-headers: {
-  'Authorization': `Bearer ${sessionStorage.getItem('authToken')},`
-  //"content-type": "application/json",
-},
-
-      body: formData
-    });
-
-    if (response.ok) {
-      const gallery = await response.json();
-
-      // Créer dynamiquement un nouvel élément pour la galerie
-      const newGalleryMain = () => {
-        for (let i = 0; i < data.length; i++) {
-      const figure = document.createElement("figure");
-      figure.id = `mainFigure-${data[i].id}`;
-      figure.innerHTML = `
-        <img src="${data[i].imageUrl}" alt="${data[i].title}" data-type="${data[i].category.name}" data-id="${data[i].id}">
-        <figcaption>${data[i].title}</figcaption>`;
-      gallery.appendChild(figure);
-        //<i class="fa-solid fa-trash-can overlay-icon"></i>`;
-         return figure;
-
-      }
-    };
-  
-    newGalleryMain();
-
-   
-      
-      // Ajouter la nouvelle photo à la galerie
-      modalPhotos.appendChild(figure.cloneNode(true));
-      projetModal.appendChild(figure.cloneNode(true));  // Ajouter également à la galerie principale
-       
-      
-      console.log("Nouvelle photo ajoutée avec succès.");
-
-      // Réinitialiser et masquer le formulaire
-      addPhotoForm.reset();
-      addPhotoForm.style.display = "none";
-      modalPhotos.style.display = "block";  // Réafficher la galerie
-     
-
-    } else {
-      console.error("Erreur lors de l'ajout de la photo via l'API.");
-    }
-    
-  } catch (error) {
-    console.error("Erreur lors de la connexion à l'API :", error);
-  }
-});*/
 
 document.addEventListener("DOMContentLoaded", function () {
   const addPhotoForm = document.querySelector(".add-photo-form");
@@ -357,6 +257,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   addPhotoForm.addEventListener("submit", async (event) => {
     event.preventDefault(); // Empêche la soumission par défaut du formulaire
+
+
+
+    
+    
+
+
 
     // Récupérer les données du formulaire
     const title = document.getElementById("photo-title").value;
@@ -411,4 +318,39 @@ document.addEventListener("DOMContentLoaded", function () {
       console.error("Erreur lors de la connexion à l'API :", error);
     }
   });
+});
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Sélection de l'icône de fermeture par ID
+  const closeModalBack = document.getElementById("modal-back");
+  const addPhotoForm = document.querySelector(".add-photo-form");
+  const modalPhotos = document.querySelector(".modalPhotos");
+
+  // Vérifier si l'icône de fermeture est bien sélectionnée
+  if (closeModalBack) {
+    
+    
+    // Ajouter l'événement de fermeture
+    closeModalBack.addEventListener("click", function () {
+      
+      
+      // Masquer le formulaire d'ajout de photo
+      addPhotoForm.style.display = "none";
+      
+      // Si vous avez une galerie de photos à réafficher, assurez-vous qu'elle est visible à nouveau
+      if (modalPhotos) {
+        modalPhotos.style.display = "block";
+      }
+    });
+  } else {
+    console.error("L'icône de fermeture n'a pas été trouvée.");
+  }
+});
+
+
+document.getElementById("close-icon").addEventListener("click", function() {
+  document.querySelector(".add-photo-form").style.display = "none";
+  console.log("Formulaire fermé");
 });
