@@ -271,6 +271,33 @@ document.addEventListener("DOMContentLoaded", function () {
     const fileInput = document.getElementById("photo-file");
     const file = fileInput.files[0];
 
+
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const fileInput = document.getElementById("photo-file");
+      const photoPreview = document.getElementById("photo-preview");
+    
+      fileInput.addEventListener("change", function () {
+        const file = fileInput.files[0];
+        
+        if (file) {
+          const reader = new FileReader();
+    
+          reader.onload = function (e) {
+            console.log("File read successfully!"); // Vérifie que le fichier est bien lu 
+            // Afficher l'aperçu de la photo
+            photoPreview.src = e.target.result;
+            photoPreview.style.display = "block";
+            console.log(photoPreview.src); // Vérifie que la source de l'image est bien définie
+          };
+    
+          reader.readAsDataURL(file);
+        }
+      });
+    });
+    
+
     // Vérifiez que toutes les données nécessaires sont bien présentes
     if (!title || !category || !file) {
       console.error("Toutes les données du formulaire doivent être fournies.");
