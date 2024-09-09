@@ -648,10 +648,14 @@ input[type="submit"] :active {
     position: static;
     color: black;
     justify-content: flex-end;
-    margin-left: 580px;
+    margin-left: 540px;
 	margin-top: 10px;
+	font-size: 21px;
 }
 
+#modal-back {
+	font-size: 21px;
+}
 
   
   
