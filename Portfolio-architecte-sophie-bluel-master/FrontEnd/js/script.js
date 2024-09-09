@@ -391,7 +391,7 @@ document.addEventListener("DOMContentLoaded", function () {
       
       // Si vous avez une galerie de photos à réafficher, assurez-vous qu'elle est visible à nouveau
       if (modalPhotos) {
-        modalPhotos.style.display = "block";
+        modalPhotos.style.display = "flex";
       }
     });
   } else {
