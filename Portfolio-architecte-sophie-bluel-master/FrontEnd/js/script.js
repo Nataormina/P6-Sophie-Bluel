@@ -341,7 +341,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const photoPreview = document.getElementById("photo-preview");
   const pictureLoaded = document.getElementById("picture-loaded");
   const photoFile = document.querySelector(".photo-file");
-
+  const submitButton = document.getElementById("submit-button"); // Sélectionne le bouton d'envoi (valider)
   
     fileInput.addEventListener("change", function () {
       const file = fileInput.files[0];
@@ -353,9 +353,14 @@ document.addEventListener("DOMContentLoaded", function () {
         reader.onload = function (e) {
            // Afficher l'aperçu de la photo
           photoPreview.src = e.target.result;
-          photoPreview.style.display = "block";
-          
+          photoPreview.style.display = "block"; 
         };
+
+        // Changer la couleur de fond du bouton en vert
+        if (submitButton) {
+          submitButton.style.backgroundColor = "#1D6156";
+        }
+      
 
         reader.readAsDataURL(file);
         
