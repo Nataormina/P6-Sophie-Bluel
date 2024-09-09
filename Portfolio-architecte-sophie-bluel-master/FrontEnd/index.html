@@ -41,8 +41,8 @@
   <div class="form add-photo-form" style="display: none;">
   
       <i id="modal-back" class="fa-solid fa-arrow-left"></i>
-   
-    <span><i id="close-icon" class="fa-solid fa-xmark close"></i></span> 
+   <button id="close-icon" class="fa-solid fa-xmark close">
+    </button>
     <h3>Ajout photo</h3>
     <form id="picture-form" action="#" method="post">
       <div class="file-section">
@@ -50,7 +50,7 @@
         <img id="photo-preview" src="#" alt="Aperçu de la photo" style="display:none; max-width: 100%; height: auto;" /></div>
         <div><i class="fa-regular fa-image picture-loaded"></i></div>
         <label class="picture-loaded" for="photo-file">+ Ajouter photo</label>
-        <input type="file" id="photo-file" name="image" accept="image/png, image/jpeg" />
+        <input type="file" id="photo-file" name="image" accept="image/png, image/jpeg" style="display: none;"/>
         <p class="picture-loaded">jpg, png : 4mo max</p>
       </div>
       <label for="title">Titre</label>

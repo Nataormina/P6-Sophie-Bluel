@@ -335,7 +335,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-
+//Prévisualisation photo dans le formulaire avant ajout galerie
 document.addEventListener("DOMContentLoaded", function () {
   const fileInput = document.getElementById("photo-file");
   const photoPreview = document.getElementById("photo-preview");
