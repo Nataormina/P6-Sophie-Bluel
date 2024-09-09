@@ -339,6 +339,8 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
   const fileInput = document.getElementById("photo-file");
   const photoPreview = document.getElementById("photo-preview");
+  const pictureLoaded = document.getElementById("picture-loaded");
+  const photoFile = document.querySelector(".photo-file");
 
   
     fileInput.addEventListener("change", function () {
@@ -347,22 +349,26 @@ document.addEventListener("DOMContentLoaded", function () {
       
       if (file) {
         const reader = new FileReader();
-
+       
         reader.onload = function (e) {
            // Afficher l'aperçu de la photo
           photoPreview.src = e.target.result;
           photoPreview.style.display = "block";
+          
         };
 
         reader.readAsDataURL(file);
-     
+        
       }
+       pictureLoaded.style.display = "none";
+       photoFile.style.display = "none";
   });
+ 
 });
 
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Sélection de l'icône de retouren arrière avec la flèche gauche par ID
+  // Sélection de l'icône de retour en arrière avec la flèche gauche par ID
   const closeModalBack = document.getElementById("modal-back");
   const addPhotoForm = document.querySelector(".add-photo-form");
   const modalPhotos = document.querySelector(".modalPhotos");

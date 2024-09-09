@@ -604,7 +604,7 @@ input[type="submit"] :active {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	padding: 10px;
+	height: 169px;
 }
 
 .file-section label {
@@ -627,10 +627,10 @@ input[type="submit"] :active {
 }
 
 #photo-container {
-	width: 80%;
+	width: 129px;
 }
 #photo-container img {
-	width: 50%;
+	width: 129px;
 }
   
 .modal-back {
