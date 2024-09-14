@@ -183,9 +183,34 @@ fetch("http://localhost:5678/api/works")
     console.error("Erreur lors de la récupération des données :", error);
   });
 
+  
+  document.addEventListener("DOMContentLoaded", () => {
+    const modalPhotos = document.querySelector(".modalPhotos");
+  
+    // Fonction pour afficher la modale
+    function showModalPhotos() {
+      if (modalPhotos) {
+        modalPhotos.style.display = "block";
+      }
+    }
+    });
+  
+    // Fonction pour cacher la modale
+    function hideModalPhotos() {
+      if (modalPhotos) {
+        modalPhotos.style.display = "none";
+      }
+    };
+
+
+
+
+
 // Fonction pour supprimer un projet du DOM
 const deleteImageFromModal = async (e) => {
   if (e.target.classList.contains("fa-trash-can")) {
+    
+
     const figureElement = e.target.closest("figure"); // Trouver l'élément figure parent
     const imageId = figureElement.querySelector("img").dataset.id; // Récupérer l'ID de l'image
 
@@ -212,10 +237,14 @@ const deleteImageFromModal = async (e) => {
         }
       );
 
+      
+
       if (response.ok) {
         console.log(`Projet avec l'ID ${imageId} supprimé de l'API.`);
+        
+        
+       
 
-     
       } else {
         console.error("Erreur lors de la suppression du projet via l'API");
       }
@@ -225,10 +254,12 @@ const deleteImageFromModal = async (e) => {
   }
 };
 
+containerModals.style.display = "flex"; 
+
+
+
 // Ajout de l'écouteur d'événements sur la modale pour la suppression des images
-document
-  .querySelector(".projetModal")
-  .addEventListener("click", deleteImageFromModal);
+document.querySelector(".modalPhotos").addEventListener("click", deleteImageFromModal);
   
 
  
@@ -256,7 +287,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const addPhotoButton = document.querySelector(".add-photo-button");
   const modalPhotos = document.querySelector(".modalPhotos");
   const projetModal = document.querySelector(".projetModal");
-
+  
   // Ajouter l'écouteur d'événement pour le bouton "Ajouter une photo"
   addPhotoButton.addEventListener("click", () => {
     // Masquer la galerie de la modale
@@ -282,6 +313,8 @@ document.addEventListener("DOMContentLoaded", function () {
       console.error("Toutes les données du formulaire doivent être fournies.");
       return;
     }
+
+    
 
     // Créer un FormData pour l'envoi des données à l'API
     const formData = new FormData();
@@ -311,13 +344,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Ajouter la nouvelle photo à la galerie
         modalPhotos.appendChild(figure);
-        projetModal.appendChild(figure.cloneNode(true)); // Ajouter également à la galerie principale
+        projetModal.appendChild(figure.cloneNode(true)); // Cloner et Ajouter également à la galerie principale
 
         // Réinitialiser et masquer le formulaire
-        addPhotoForm.reset();
-        addPhotoForm.style.display = "none";
-        modalPhotos.style.display = "block"; // Réafficher la galerie
-
+        addPhotoForm.reset(); // Réinitialiser le formulaire
+        addPhotoForm.style.display = "none"; // Masquer le formulaire d'ajout
+        modalPhotos.style.display = "block"; // Afficher la section modalPhotos
+        containerModals.style.display = "block";
         
 
         
@@ -332,7 +365,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-
 //Prévisualisation photo dans le formulaire avant ajout galerie
 document.addEventListener("DOMContentLoaded", function () {
   const fileInput = document.getElementById("photo-file");
@@ -341,6 +373,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const photoFile = document.querySelector(".photo-file");
   const submitButton = document.getElementById("submit-button"); // Sélectionne le bouton d'envoi (valider)
   
+
+
     fileInput.addEventListener("change", function () {
       const file = fileInput.files[0];
       
@@ -358,16 +392,21 @@ document.addEventListener("DOMContentLoaded", function () {
         if (submitButton) {
           submitButton.style.backgroundColor = "#1D6156";
         }
-      
+        
 
         reader.readAsDataURL(file);
         
       }
        pictureLoaded.style.display = "none";
        photoFile.style.display = "none";
+       
+
+
   });
  
 });
+
+
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -381,15 +420,19 @@ document.addEventListener("DOMContentLoaded", function () {
     
     
     // Ajouter l'événement de retour à la modale précédente
-    closeModalBack.addEventListener("click", function () {
+    closeModalBack.addEventListener("click", () => {
       
       
       // Masquer le formulaire d'ajout de photo
       addPhotoForm.style.display = "none";
       
+      // Afficher la galerie des photos
+    modalPhotos.style.display = "block";
+    containerModals.style.display = "block"; 
+      
       // Si vous avez une galerie de photos à réafficher, assurez-vous qu'elle est visible à nouveau
-      if (modalPhotos) {
-        modalPhotos.style.display = "flex";
+      if (containerModals) {
+        containerModals.style.display = "block";
       }
     });
   } else {
@@ -397,8 +440,18 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+
+
+
 // Fermeture du formulaire au click sur la croix
 document.getElementById("close-icon").addEventListener("click", function() {
   document.querySelector(".add-photo-form").style.display = "none";
   console.log("Formulaire fermé");
 });
+
+
+
+
+
+
+
