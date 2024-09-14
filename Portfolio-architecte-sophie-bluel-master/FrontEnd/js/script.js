@@ -190,7 +190,7 @@ fetch("http://localhost:5678/api/works")
     // Fonction pour afficher la modale
     function showModalPhotos() {
       if (modalPhotos) {
-        modalPhotos.style.display = "block";
+        modalPhotos.style.display = "flex";
       }
     }
     });
@@ -349,8 +349,8 @@ document.addEventListener("DOMContentLoaded", function () {
         // Réinitialiser et masquer le formulaire
         addPhotoForm.reset(); // Réinitialiser le formulaire
         addPhotoForm.style.display = "none"; // Masquer le formulaire d'ajout
-        modalPhotos.style.display = "block"; // Afficher la section modalPhotos
-        containerModals.style.display = "block";
+        modalPhotos.style.display = "flex"; // Afficher la section modalPhotos
+        containerModals.style.display = "flex";
         
 
         
@@ -427,12 +427,12 @@ document.addEventListener("DOMContentLoaded", function () {
       addPhotoForm.style.display = "none";
       
       // Afficher la galerie des photos
-    modalPhotos.style.display = "block";
-    containerModals.style.display = "block"; 
+    modalPhotos.style.display = "flex";
+    containerModals.style.display = "flex"; 
       
       // Si vous avez une galerie de photos à réafficher, assurez-vous qu'elle est visible à nouveau
       if (containerModals) {
-        containerModals.style.display = "block";
+        containerModals.style.display = "flex";
       }
     });
   } else {
