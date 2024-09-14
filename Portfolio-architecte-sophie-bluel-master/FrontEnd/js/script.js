@@ -82,6 +82,7 @@ fetch("http://localhost:5678/api/works")
 
 document.addEventListener("DOMContentLoaded", () => {
   const authToken = sessionStorage.getItem("authToken");
+  
 
   if (authToken) {
     const faRegular = document.querySelector(".fa-regular");
@@ -100,6 +101,8 @@ document.addEventListener("DOMContentLoaded", () => {
           containerModals.style.display = "flex";
         });
       }
+    
+    
     } else {
       console.error("Les éléments .fa-regular ou .modify n'existent pas.");
     }
@@ -107,6 +110,9 @@ document.addEventListener("DOMContentLoaded", () => {
     console.error("authToken est manquant ou invalide.");
   }
 });
+
+
+
 
 // Gérer le mode administrateur
 function displayModeAdmin() {
@@ -208,6 +214,8 @@ const deleteImageFromModal = async (e) => {
 
       if (response.ok) {
         console.log(`Projet avec l'ID ${imageId} supprimé de l'API.`);
+
+     
       } else {
         console.error("Erreur lors de la suppression du projet via l'API");
       }
@@ -222,6 +230,8 @@ document
   .querySelector(".projetModal")
   .addEventListener("click", deleteImageFromModal);
   
+
+ 
 
 window.onclick = function (event) {
   if (event.target == containerModals) {
@@ -256,31 +266,15 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   addPhotoForm.addEventListener("submit", async (event) => {
-    event.preventDefault(); // Empêche la soumission par défaut du formulaire
-
-
-
+    event.preventDefault(); // Empêche le rechargement de la page
     
-    
-
-
 
     // Récupérer les données du formulaire
     const title = document.getElementById("photo-title").value;
     const category = document.getElementById("photo-category").value;
     const fileInput = document.getElementById("photo-file");
     const file = fileInput.files[0];
-
-
-
-
-
-
-
-
-
-    
-    
+        
     
 
     // Vérifiez que toutes les données nécessaires sont bien présentes
@@ -323,6 +317,10 @@ document.addEventListener("DOMContentLoaded", function () {
         addPhotoForm.reset();
         addPhotoForm.style.display = "none";
         modalPhotos.style.display = "block"; // Réafficher la galerie
+
+        
+
+        
       } else {
         console.error("Erreur lors de l'ajout de la photo via l'API.");
       }
