@@ -77,12 +77,13 @@ fetch("http://localhost:5678/api/works")
     // Vérifier si l'utilisateur est connecté et cacher les filtres en mode édition
     if (sessionStorage.getItem("authToken")) {
       filtres.style.display = "none";
+      containerModals.style.display = "none";
     }
   });
 
 document.addEventListener("DOMContentLoaded", () => {
   const authToken = sessionStorage.getItem("authToken");
-  
+  containerModals.style.display = "flex";
 
   if (authToken) {
     const faRegular = document.querySelector(".fa-regular");
@@ -140,6 +141,8 @@ const containerModals = document.querySelector(".containerModals");
 const loginLi = document.getElementById("loginLi");
 
 displayModeAdmin();
+
+
 
 if (bannerEdition) {
   bannerEdition.addEventListener("click", (event) => {
@@ -213,7 +216,7 @@ const deleteImageFromModal = async (e) => {
 
     const figureElement = e.target.closest("figure"); // Trouver l'élément figure parent
     const imageId = figureElement.querySelector("img").dataset.id; // Récupérer l'ID de l'image
-
+    
     // Suppression de l'image de la modale
     figureElement.remove();
 
@@ -223,6 +226,7 @@ const deleteImageFromModal = async (e) => {
     );
     if (homepageImage) {
       homepageImage.closest("figure").remove();
+      
     }
 
     // Appel à l'API pour supprimer le projet
@@ -237,7 +241,7 @@ const deleteImageFromModal = async (e) => {
         }
       );
 
-      
+  
 
       if (response.ok) {
         console.log(`Projet avec l'ID ${imageId} supprimé de l'API.`);
@@ -261,7 +265,7 @@ containerModals.style.display = "flex";
 // Ajout de l'écouteur d'événements sur la modale pour la suppression des images
 document.querySelector(".modalPhotos").addEventListener("click", deleteImageFromModal);
   
-
+containerModals.style.display = "flex"; 
  
 
 window.onclick = function (event) {
