@@ -448,10 +448,3 @@ document.getElementById("close-icon").addEventListener("click", function() {
   document.querySelector(".add-photo-form").style.display = "none";
   console.log("Formulaire fermé");
 });
-
-
-
-
-
-
-

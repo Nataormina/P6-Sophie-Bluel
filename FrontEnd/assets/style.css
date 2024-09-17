@@ -385,7 +385,6 @@ padding: 25px;
 
 .modalPhotos img {
 	width: 15%;
-	
 	flex-direction: row;
 	margin-left: 5%;
 	margin-right: 5%;
@@ -503,7 +502,6 @@ hr {
   }
   
   .projetModal .overlay-icon {
-
 	margin-top: 14px;
 	margin-left: -20px;
 	right: 34px;
