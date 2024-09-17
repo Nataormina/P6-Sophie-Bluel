@@ -77,13 +77,13 @@ fetch("http://localhost:5678/api/works")
     // Vérifier si l'utilisateur est connecté et cacher les filtres en mode édition
     if (sessionStorage.getItem("authToken")) {
       filtres.style.display = "none";
-      containerModals.style.display = "none";
+      containerModals.style.display = "flex";
     }
   });
 
 document.addEventListener("DOMContentLoaded", () => {
   const authToken = sessionStorage.getItem("authToken");
-  containerModals.style.display = "flex";
+  //containerModals.style.display = "flex";
 
   if (authToken) {
     const faRegular = document.querySelector(".fa-regular");
@@ -123,7 +123,7 @@ function displayModeAdmin() {
     bannerEdition.innerHTML =
       '<p><a href=""><i class="fa-regular fa-pen-to-square"></i>Mode édition</a></p>';
     loginLi.innerHTML = '<a href="#">logout</a>';
-
+    
     document
       .getElementById("loginLi")
       .addEventListener("click", function (event) {
@@ -206,9 +206,6 @@ fetch("http://localhost:5678/api/works")
     };
 
 
-
-
-
 // Fonction pour supprimer un projet du DOM
 const deleteImageFromModal = async (e) => {
   if (e.target.classList.contains("fa-trash-can")) {
@@ -220,15 +217,18 @@ const deleteImageFromModal = async (e) => {
     // Suppression de l'image de la modale
     figureElement.remove();
 
+       
+      containerModals.style.display = "flex";
+
     // Supprimer l'image correspondante de la galerie sur la page d'accueil
     const homepageImage = document.querySelector(
       `.gallery img[data-id="${imageId}"]`
     );
     if (homepageImage) {
       homepageImage.closest("figure").remove();
-      
+  
     }
-
+    
     // Appel à l'API pour supprimer le projet
     try {
       const response = await fetch(
@@ -303,7 +303,6 @@ document.addEventListener("DOMContentLoaded", function () {
   addPhotoForm.addEventListener("submit", async (event) => {
     event.preventDefault(); // Empêche le rechargement de la page
     
-
     // Récupérer les données du formulaire
     const title = document.getElementById("photo-title").value;
     const category = document.getElementById("photo-category").value;
@@ -338,7 +337,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (response.ok) {
         const newWork = await response.json();
         console.log("Nouvelle photo ajoutée avec succès :", newWork);
-
+        
         // Créer dynamiquement un nouvel élément pour la galerie
         const figure = document.createElement("figure");
         figure.id = `mainFigure-${newWork.id}`;
@@ -452,3 +451,4 @@ document.getElementById("close-icon").addEventListener("click", function() {
   document.querySelector(".add-photo-form").style.display = "none";
   console.log("Formulaire fermé");
 });
+
