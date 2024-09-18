@@ -103,7 +103,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
     
-    
     } else {
       console.error("Les éléments .fa-regular ou .modify n'existent pas.");
     }
@@ -216,9 +215,8 @@ const deleteImageFromModal = async (e) => {
     
     // Suppression de l'image de la modale
     figureElement.remove();
-
-       
-      containerModals.style.display = "flex";
+ 
+    containerModals.style.display = "flex";
 
     // Supprimer l'image correspondante de la galerie sur la page d'accueil
     const homepageImage = document.querySelector(
@@ -226,7 +224,6 @@ const deleteImageFromModal = async (e) => {
     );
     if (homepageImage) {
       homepageImage.closest("figure").remove();
-  
     }
     
     // Appel à l'API pour supprimer le projet
@@ -242,12 +239,8 @@ const deleteImageFromModal = async (e) => {
       );
 
   
-
       if (response.ok) {
         console.log(`Projet avec l'ID ${imageId} supprimé de l'API.`);
-        
-        
-       
 
       } else {
         console.error("Erreur lors de la suppression du projet via l'API");
@@ -259,7 +252,6 @@ const deleteImageFromModal = async (e) => {
 };
 
 containerModals.style.display = "flex"; 
-
 
 
 // Ajout de l'écouteur d'événements sur la modale pour la suppression des images
@@ -280,10 +272,6 @@ document.addEventListener("DOMContentLoaded", function () {
     containerModals.style.display = "none";
   });
 });
-
-
-
-
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -309,15 +297,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const fileInput = document.getElementById("photo-file");
     const file = fileInput.files[0];
         
-    
-
     // Vérifiez que toutes les données nécessaires sont bien présentes
     if (!title || !category || !file) {
       console.error("Toutes les données du formulaire doivent être fournies.");
       return;
     }
 
-    
 
     // Créer un FormData pour l'envoi des données à l'API
     const formData = new FormData();
@@ -355,7 +340,6 @@ document.addEventListener("DOMContentLoaded", function () {
         modalPhotos.style.display = "flex"; // Afficher la section modalPhotos
         containerModals.style.display = "flex";
         
-
         
       } else {
         console.error("Erreur lors de l'ajout de la photo via l'API.");
@@ -377,7 +361,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const submitButton = document.getElementById("submit-button"); // Sélectionne le bouton d'envoi (valider)
   
 
-
     fileInput.addEventListener("change", function () {
       const file = fileInput.files[0];
       
@@ -396,17 +379,12 @@ document.addEventListener("DOMContentLoaded", function () {
           submitButton.style.backgroundColor = "#1D6156";
         }
         
-
-        reader.readAsDataURL(file);
-        
+        reader.readAsDataURL(file); 
       }
+
        pictureLoaded.style.display = "none";
        photoFile.style.display = "none";
-       
-
-
   });
- 
 });
 
 
@@ -445,10 +423,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-
 // Fermeture du formulaire au click sur la croix
 document.getElementById("close-icon").addEventListener("click", function() {
   document.querySelector(".add-photo-form").style.display = "none";
   console.log("Formulaire fermé");
 });
-
