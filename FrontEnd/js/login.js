@@ -1,7 +1,6 @@
 const loginApi = "http://localhost:5678/api/users/login";
 
 
-
 document.addEventListener("DOMContentLoaded", function() {
   const loginForm = document.getElementById("loginForm");
   if (loginForm) {

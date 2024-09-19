@@ -77,7 +77,7 @@ fetch("http://localhost:5678/api/works")
     // Vérifier si l'utilisateur est connecté et cacher les filtres en mode édition
     if (sessionStorage.getItem("authToken")) {
       filtres.style.display = "none";
-      containerModals.style.display = "flex";
+      containerModals.style.display = "none"; // Pour ne pas que la modale ne s'affiche par défaut à la connexion
     }
   });
 
@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (modify) {
         modify.addEventListener("click", (event) => {
           event.preventDefault();
-          containerModals.style.display = "flex";
+          containerModals.style.display = "flex"; // Afficher seulement après le clic
         });
       }
     
@@ -146,7 +146,7 @@ displayModeAdmin();
 if (bannerEdition) {
   bannerEdition.addEventListener("click", (event) => {
     event.preventDefault();
-    containerModals.style.display = "flex";
+    //containerModals.style.display = "flex";
   });
 }
 
@@ -216,7 +216,7 @@ const deleteImageFromModal = async (e) => {
     // Suppression de l'image de la modale
     figureElement.remove();
  
-    containerModals.style.display = "flex";
+    //containerModals.style.display = "flex";
 
     // Supprimer l'image correspondante de la galerie sur la page d'accueil
     const homepageImage = document.querySelector(
@@ -241,7 +241,8 @@ const deleteImageFromModal = async (e) => {
   
       if (response.ok) {
         console.log(`Projet avec l'ID ${imageId} supprimé de l'API.`);
-
+        // Afficher la modale après suppression
+        containerModals.style.display = "flex"; 
       } else {
         console.error("Erreur lors de la suppression du projet via l'API");
       }
@@ -251,13 +252,12 @@ const deleteImageFromModal = async (e) => {
   }
 };
 
-containerModals.style.display = "flex"; 
+
 
 
 // Ajout de l'écouteur d'événements sur la modale pour la suppression des images
 document.querySelector(".modalPhotos").addEventListener("click", deleteImageFromModal);
-  
-containerModals.style.display = "flex"; 
+ 
  
 
 window.onclick = function (event) {
@@ -282,6 +282,8 @@ document.addEventListener("DOMContentLoaded", function () {
   
   // Ajouter l'écouteur d'événement pour le bouton "Ajouter une photo"
   addPhotoButton.addEventListener("click", () => {
+    // Afficher la modale au moment de l'ajout de photo
+    containerModals.style.display = "flex"; 
     // Masquer la galerie de la modale
     modalPhotos.style.display = "none";
     // Afficher le formulaire d'ajout de photo
@@ -323,22 +325,23 @@ document.addEventListener("DOMContentLoaded", function () {
         const newWork = await response.json();
         console.log("Nouvelle photo ajoutée avec succès :", newWork);
         
-        // Créer dynamiquement un nouvel élément pour la galerie
+        // Ajouter dynamiquement la nouvelle photo à la galerie
         const figure = document.createElement("figure");
         figure.id = `mainFigure-${newWork.id}`;
         figure.innerHTML = `
           <img src="${newWork.imageUrl}" alt="${newWork.title}" data-type="${newWork.category.name}" data-id="${newWork.id}">
           <figcaption>${newWork.title}</figcaption>`;
 
-        // Ajouter la nouvelle photo à la galerie
+        // Ajouter la nouvelle photo à la galerie modale et principale
         modalPhotos.appendChild(figure);
-        projetModal.appendChild(figure.cloneNode(true)); // Cloner et Ajouter également à la galerie principale
+        const projetModal = document.querySelector(".projetModal");
+        projetModal.appendChild(figure.cloneNode(true)); // Cloner et jouter également à la galerie principale
 
-        // Réinitialiser et masquer le formulaire
+        // Réinitialiser le formulaire et afficher la galerie des photos à nouveau
         addPhotoForm.reset(); // Réinitialiser le formulaire
         addPhotoForm.style.display = "none"; // Masquer le formulaire d'ajout
         modalPhotos.style.display = "flex"; // Afficher la section modalPhotos
-        containerModals.style.display = "flex";
+        containerModals.style.display = "flex"; // Afficher la modale après ajout
         
         
       } else {
@@ -392,34 +395,59 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", function () {
   // Sélection de l'icône de retour en arrière avec la flèche gauche par ID
-  const closeModalBack = document.getElementById("modal-back");
+ 
+  
+  const submitButton = document.getElementById("submit-button");
   const addPhotoForm = document.querySelector(".add-photo-form");
   const modalPhotos = document.querySelector(".modalPhotos");
 
-  // Vérifier si l'icône de retour en arrière flèche gauche est bien sélectionnée
-  if (closeModalBack) {
-    
-    
-    // Ajouter l'événement de retour à la modale précédente
-    closeModalBack.addEventListener("click", () => {
+  
+  
+// Fixation de la modale après validation de l'ajout de la photo
+  submitButton.addEventListener ("click", async (event) => {
+    event.preventDefault();
+    addPhotoForm.style.display = "none"; // Masquer le formulaire d'ajout de photo
+    modalPhotos.style.display = "flex"; // Afficher la galerie des photos
+    containerModals.style.display = "flex"; // Assurer que la modale reste visible
+  });
+  });
+
+ 
+
+
+  document.addEventListener("DOMContentLoaded", function () {
+    // Sélection de l'icône de retour en arrière avec la flèche gauche par ID
+    const closeModalBack = document.getElementById("modal-back");
+    const addPhotoForm = document.querySelector(".add-photo-form");
+    const modalPhotos = document.querySelector(".modalPhotos");
+  
+    // Vérifier si l'icône de retour en arrière flèche gauche est bien sélectionnée
+    if (closeModalBack) {
       
       
-      // Masquer le formulaire d'ajout de photo
-      addPhotoForm.style.display = "none";
-      
-      // Afficher la galerie des photos
-    modalPhotos.style.display = "flex";
-    containerModals.style.display = "flex"; 
-      
-      // Si vous avez une galerie de photos à réafficher, assurez-vous qu'elle est visible à nouveau
-      if (containerModals) {
-        containerModals.style.display = "flex";
-      }
-    });
-  } else {
-    console.error("L'icône de fermeture n'a pas été trouvée.");
-  }
-});
+      // Ajouter l'événement de retour à la modale précédente
+      closeModalBack.addEventListener("click", () => {
+        
+        
+        // Masquer le formulaire d'ajout de photo
+        addPhotoForm.style.display = "none";
+        
+        // Afficher la galerie des photos
+      modalPhotos.style.display = "flex";
+      containerModals.style.display = "flex"; 
+        
+        // Si vous avez une galerie de photos à réafficher, assurez-vous qu'elle est visible à nouveau
+        if (containerModals) {
+          containerModals.style.display = "flex";
+        }
+      });
+    } else {
+      console.error("L'icône de fermeture n'a pas été trouvée.");
+    }
+  });
+  
+
+
 
 
 
